@@ -16,8 +16,8 @@ spring:
         source1-out-0:
           destination: test1
           error-handler-definition: errorHandle
-#    function:
-#      definition: source1
+    function:
+      definition: source1
 
 logging:
   level:

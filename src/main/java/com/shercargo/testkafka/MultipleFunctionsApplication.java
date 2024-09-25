@@ -33,14 +33,14 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class MultipleFunctionsApplication {
 
-    private final StreamBridge streamBridge;
-
-    public MultipleFunctionsApplication(StreamBridge streamBridge) {
-        this.streamBridge = streamBridge;
-    }
+//    private final StreamBridge streamBridge;
+//
+//    public MultipleFunctionsApplication(StreamBridge streamBridge) {
+//        this.streamBridge = streamBridge;
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(MultipleFunctionsApplication.class, args);
@@ -52,24 +52,24 @@ public class MultipleFunctionsApplication {
                 "Send event: " + message.getHeaders().get(KafkaHeaders.RECORD_METADATA, RecordMetadata.class));
     }
 
-//    @Bean
-//    public Supplier<String> source1() {
-//        return () -> {
-//            String message = "FromSource1";
-//            System.out.println("******************");
-//            System.out.println("From Source1");
-//            System.out.println("******************");
-//            System.out.println("Sending value: " + message);
-//            throw new RuntimeException("123");
-//
-//        };
-//    }
+    @Bean
+    public Supplier<String> source1() {
+        return () -> {
+            String message = "FromSource1";
+            System.out.println("******************");
+            System.out.println("From Source1");
+            System.out.println("******************");
+            System.out.println("Sending value: " + message);
+            throw new RuntimeException("123");
 
-    @Scheduled(fixedDelay = 3000)
-    public void send() {
-        this.streamBridge.send("source1-out-0",
-                MessageBuilder.withPayload("123").setHeader(KafkaHeaders.KEY, 1L).build());
+        };
     }
+
+//    @Scheduled(fixedDelay = 3000)
+//    public void send() {
+//        this.streamBridge.send("source1-out-0",
+//                MessageBuilder.withPayload("123").setHeader(KafkaHeaders.KEY, 1L).build());
+//    }
 
     @Bean
     public Consumer<ErrorMessage> errorHandle() {

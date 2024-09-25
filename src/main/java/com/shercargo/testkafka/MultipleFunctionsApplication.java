@@ -65,7 +65,7 @@ public class MultipleFunctionsApplication {
 //        };
 //    }
 
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 5000)
     public void send() {
         this.streamBridge.send("source1-out-0",
                 MessageBuilder.withPayload("123").setHeader(KafkaHeaders.KEY, 1L).build());

@@ -1,0 +1,26 @@
+server:
+  port: 0
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: "localhost"
+        bindings:
+          source1-out-0:
+            producer:
+              record-metadata-channel: "metadata"
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.UUIDSerializer
+      bindings:
+        source1-out-0:
+          destination: test1
+          error-handler-definition: errorHandle
+#    function:
+#      definition: source1
+
+logging:
+  level:
+    org:
+      springframework:
+        integration: DEBUG

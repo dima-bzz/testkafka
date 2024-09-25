@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package demo;
+package com.shercargo.testkafka;
 
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.boot.SpringApplication;
